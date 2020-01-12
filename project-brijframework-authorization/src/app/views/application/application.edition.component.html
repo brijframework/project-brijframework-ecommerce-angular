@@ -1,0 +1,145 @@
+<div class="animated fadeIn">
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <form [formGroup]="form"> 
+      <div class="modal-lg">
+      <div class="modal-header">
+         <h4 class="modal-title" id="modal-basic-title">Application Edition</h4>
+      </div> 
+      <div class="modal-body"> 
+        <div class="row" > 
+          <div class="col-sm-12 form-group" >
+            
+            <input type="hidden" class="form-control" formControlName="id" [(ngModel)]=applicationEdition.id > 
+            
+          </div>
+          <div class="col-sm-6 form-group" >
+            <label>Application</label> 
+            <select class="form-control" formControlName="applicationId" [(ngModel)]="applicationEdition.applicationId">
+              <option *ngFor="let application of applications" [value]="application.id" [selected]="applicationEdition.applicationId == application.id">{{application.appName}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 form-group" >
+           
+            <label>Description</label> 
+            <input type="text" class="form-control" formControlName="description" [(ngModel)]=applicationEdition.description > 
+          </div>
+          <div class="col-sm-4 form-group" >
+              <label class="col-form-label" for="monthlyRate">Monthly Rate</label>
+              <div class="controls">
+                <div class="input-prepend input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input class="form-control" id="monthlyRate" size="16" type="text" formControlName="monthlyRate" [(ngModel)]=applicationEdition.monthlyRate >
+                  <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-4 form-group" >
+            <label>StartPayDay</label> 
+            <input type="text" class="form-control" formControlName="startPayDay" [(ngModel)]=applicationEdition.startPayDay > 
+          </div>
+          
+          <div class="col-sm-4 form-group" >
+              <label>Version</label> 
+              <input type="text" class="form-control" formControlName="version"  [(ngModel)]=applicationEdition.version > 
+          </div>
+          <div class="col-sm-4 form-group" >
+            <label class="switch switch-label switch-pill switch-outline-primary">
+              Trail
+              <input type="checkbox" class="switch-input" formControlName="trail" [(ngModel)]=applicationEdition.trail >
+              <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+            </label>
+        </div>
+          <div class="col-sm-4 form-group" >
+            <label class="switch switch-label switch-pill switch-outline-primary">
+              status
+              <input type="checkbox" class="switch-input" formControlName="status" [(ngModel)]=applicationEdition.status >
+              <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+            </label>
+        </div>
+      </div>
+      </div> 
+       <div class="modal-footer"> 
+        <div class="row"> 
+          <div class="col-sm-12 actionDiv"> 
+            <button class="btn btn-sm btn-success" type="button" (click) ="saveApplicationEdition(form.value)" ><i class="fa fa-dot-circle-o" ></i> Submit</button>
+            
+            <button type="button" (click)="d('Cross click')" class="btn btn-secondary">Cancel</button> 
+          </div> 
+        </div> 
+      </div> 
+    </div>
+    </form> 
+  </ng-template> 
+
+  
+   <!--/.row-->
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-8"><i class="fa fa-align-justify"></i> Application </div>
+          <div class="col-md-4"><div class="align-right"><button  type="button" class="btn btn-primary" (click)="addApplicationRole(content)">Add</button> </div></div>
+        </div>
+      </div>
+      <div class="card-body " style="padding:0px; margin: 0px;">
+        <table class="table table-bordered table-striped" style="padding:0px; margin: 0px;">
+          <thead>
+            <tr>
+              <th>App Id</th>
+              <th>Description</th>
+              <th>monthlyRate</th>
+              <th>startPayDay</th>
+              <th>trail</th>
+              <th>version</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <ng-container *ngFor="let applicationEdition of applicationEditions">
+               <tr>
+                <td>{{applicationEdition.applicationId}}</td>
+                <td>{{applicationEdition.description}}</td>
+                <td>{{applicationEdition.monthlyRate}}</td>
+                <td>{{applicationEdition.startPayDay}}</td>
+                <td>{{applicationEdition.trail}}</td>
+                <td>{{applicationEdition.version}}</td>
+                <td>
+                  <span class="badge badge-success">{{applicationEdition.status}}</span>
+                </td>
+                <td>
+                  <span class="fa fa-edit fa-lg mt-4" (click)="updateApplicationEdition(content,applicationEdition)"></span>
+                  <span class="fa fa-remove fa-lg mt-4" (click)="deleteApplicationEdition(applicationEdition)"></span>
+                </td>
+              </tr>
+           </ng-container>
+          </tbody>
+        </table>
+        <div class="card-footer">
+        <nav >
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="">2</a></li>
+            <li class="page-item"><a class="page-link" href="">3</a></li>
+            <li class="page-item"><a class="page-link" href="">4</a></li>
+            <li class="page-item"><a class="page-link" href="">Next</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
+<!--/.row-->
+</div>
