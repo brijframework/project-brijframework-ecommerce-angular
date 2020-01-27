@@ -7,4 +7,13 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent {
   form: FormGroup;
+
+  loadApplications() {
+    this.applicationService.getApplicationList().subscribe(
+      applicationList => {
+        this.applications = applicationList;
+      },
+    );
+  }
+  
  }
