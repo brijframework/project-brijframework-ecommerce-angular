@@ -12,18 +12,19 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     public applications: any[];
     public modelData = {
       id: null,
-      appId: null,
-      appName: null,
-      appURL: null,
-      appLogo: null,
-      status : null,
-      appDetail : {
+      firstName: null,
+      middleName: null,
+      lastName: null,
+      dateOfBirth: null,
+      gender: null,
+      active : null,
+      address : {
        id : null,
-       displayOrder: null,
-       internalHost: null,
-       externalHost: null,
-       internalPort: null,
-       externalPort: null
+       addressLine1: null,
+       addressLine2: null,
+       landMark: null,
+       zipcode: null,
+       cityId: null
       }
     };
     form: FormGroup;
@@ -38,18 +39,19 @@ export class ApplicationComponent implements OnInit, OnDestroy {
    ngOnInit(): void {
      this.applications = [];
      this.form = this.fb.group({
-        id: [0],
-        appId: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        appName: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        appURL: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        appLogo: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        status: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        'appDetail.id':  ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(1)])],
-        'appDetail.displayOrder':  ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        'appDetail.internalHost': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        'appDetail.internalPort': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        'appDetail.externalHost': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
-        'appDetail.externalPort': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])]
+        id: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        firstName: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        middleName: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        lastName: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        gender: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        dateOfBirth: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        active: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        'address.id':  ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(1)])],
+        'address.addressLine1':  ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        'address.addressLine2': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        'address.landMark': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        'address.zipcode': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])],
+        'address.cityId': ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(2)])]
       });
       this.columns = [
         { key: 'appLogo', title: 'App Logo', orderEnabled: false },
@@ -77,8 +79,8 @@ export class ApplicationComponent implements OnInit, OnDestroy {
   }
 
   updateApplication(content: any, application: any) {
-    if ( application['appDetail'] == null) {
-      application['appDetail'] = this.modelData.appDetail;
+    if ( application['address'] == null) {
+      application['address'] = this.modelData.address;
     }
     console.log('values=', application);
     this.modelData = application;
@@ -118,17 +120,18 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     console.log('values=', values);
     const requstJson = {};
     requstJson['id'] = values.id;
-    requstJson['appId'] = values.appId;
-    requstJson['appName'] = values.appName;
-    requstJson['appURL'] = values.appURL;
-    requstJson['status'] = values.status;
-    requstJson['appDetail'] = {};
-    requstJson['appDetail']['id'] = values['appDetail.id'];
-    requstJson['appDetail']['displayOrder'] = values['appDetail.displayOrder'];
-    requstJson['appDetail']['internalHost'] = values['appDetail.internalHost'];
-    requstJson['appDetail']['internalPort'] = values['appDetail.internalPort'];
-    requstJson['appDetail']['externalHost'] = values['appDetail.externalHost'];
-    requstJson['appDetail']['externalPort'] = values['appDetail.externalPort'];
+    requstJson['firstName'] = values.firstName;
+    requstJson['middleName'] = values.middleName;
+    requstJson['lastName'] = values.lastName;
+    requstJson['dateOfBirth'] = values.dateOfBirth;
+    requstJson['gender'] = values.gender;
+    requstJson['address'] = {};
+    requstJson['address']['id'] = values['address.id'];
+    requstJson['address']['addressLine1'] = values['address.addressLine1'];
+    requstJson['address']['addressLine2'] = values['address.addressLine2'];
+    requstJson['address']['landMark'] = values['address.landMark'];
+    requstJson['address']['zipcode'] = values['address.zipcode'];
+    requstJson['address']['cityId'] = values['address.cityId'];
     console.log('requstJson=', requstJson);
     return requstJson;
   }

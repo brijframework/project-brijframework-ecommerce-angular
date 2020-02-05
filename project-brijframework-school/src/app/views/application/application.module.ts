@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+
 import { ApplicationComponent } from './application.component';
 import { ApplicationRoutingModule } from './application-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -8,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ApplicationRoleComponent } from './application.role.component';
 import { ApplicationFeatureComponent } from './application.feature.component';
 import { ApplicationEditionComponent } from './application.edition.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 @NgModule({
   imports: [
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
     CommonModule,
+    TabsModule,
     ApplicationRoutingModule
   ],
   declarations: [ ApplicationComponent , ApplicationRoleComponent, ApplicationFeatureComponent , ApplicationEditionComponent]
