@@ -11,7 +11,6 @@ export const navItems: INavData[] = [
     url: '/student',
     icon: 'icon-heart',
     children: [
-    
       {
         name: 'Student Info',
         url: '/student/detail',
